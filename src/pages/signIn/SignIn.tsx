@@ -1,31 +1,31 @@
-import React from "react";
-import "./SignIn.css";
+import React from 'react';
+import './SignIn.css'; 
 
-const SignIn = () => {
+const SignIn: React.FC = () => {
   return (
-    <div className="signin-container">
-      <div className="signin-box">
-        <h2>Welcome Back</h2>
-        <form className="signin-form">
+    <div className="login-container">
+      <div className="login-form">
+        <h2>Login to your Account</h2>
+        <p>See what is going on with your business</p>
+        <button className="google-button">Continue with Google</button>
+        <div className="divider">or Sign in with Email</div>
+        <form>
           <div className="input-group">
-            <label htmlFor="email">Email</label>
-            <input type="email" id="email" placeholder="Enter your email" />
+            <input type="email" placeholder="Email" required />
           </div>
           <div className="input-group">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              placeholder="Enter your password"
-            />
+            <input type="password" placeholder="Password" required />
           </div>
-          <button type="submit" className="signin-button">
-            Sign In
-          </button>
+          <div className="options">
+            <div className="remember">
+              <input type="checkbox" id="remember-me" />
+              <label htmlFor="remember-me">Remember Me</label>
+            </div>
+            <a href="#">Forgot Password?</a>
+          </div>
+          <button type="submit" className="login-button">Login</button>
         </form>
-        <p className="signup-link">
-          Don't have an account? <a href="/signup">Sign Up</a>
-        </p>
+        <p>Not Registered Yet? <a href="#">Create an account</a></p>
       </div>
     </div>
   );

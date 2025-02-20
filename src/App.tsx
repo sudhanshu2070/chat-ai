@@ -6,8 +6,8 @@ function App() {
   return (
     <div className="App">
       {/* Use routing or state to toggle between SignIn and SignUp */}
-      {/* <SignIn /> */}
-      <SignUp />
+      <SignIn />
+      {/* <SignUp /> */}
     </div>
   );
 }
