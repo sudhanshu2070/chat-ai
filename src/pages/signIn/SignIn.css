@@ -1,110 +1,102 @@
-.login-container {
+/* Background styling */
+.signin-container {
     display: flex;
-    height: 100vh;
-    background-color: #f0f0f0;
-  }
-  
-  .left-panel {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-image: url('../../../public/images/Skull.png');
+    min-height: 100vh;
+    background-image: url('../../../public/images/bg.jpg'); /* Path to the background image in the public folder */
     background-size: cover;
     background-position: center;
-    color: white;
-    text-align: center;
     padding: 20px;
   }
   
-  .skull-image {
+  /* Card styling */
+  .signin-card {
+    display: flex;
+    /* background: rgba(255, 255, 255, 0.9); */
+    background: #1E1E1E;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    max-width: 800px;
     width: 100%;
-    max-width: 200px;
-    margin-bottom: 20px;
   }
   
-  .right-panel {
-    flex: 1;
+  .card-image {
+    width: 50%;
+    object-fit: cover;
+  }
+  
+  /* Form styling */
+  .signin-form {
+    width: 50%;
+    padding: 40px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    background-color: white;
-    padding: 40px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
-  .logo {
-    font-size: 24px;
-    font-weight: bold;
+  .signin-form h2 {
     margin-bottom: 20px;
-    color: #6a1b9a;
-  }
-  
-  .google-button {
-    background-color: #4285f4;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-bottom: 20px;
-    width: 100%;
-  }
-  
-  .divider {
-    color: #666;
+    font-size: 2rem;
+    color: #FFFFFF;
     text-align: center;
-    margin-bottom: 20px;
   }
   
   .input-group {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #555;
   }
   
   .input-group input {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
   }
   
-  .options {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
+  .input-group input:focus {
+    border-color: #667eea;
   }
   
-  .remember {
-    display: flex;
-    align-items: center;
-  }
-  
-  .remember input {
-    margin-right: 5px;
-  }
-  
-  .login-button {
+  .signin-button {
     width: 100%;
-    padding: 10px;
-    background-color: #6a1b9a;
+    padding: 12px;
+    background: #667eea;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
+    font-size: 1rem;
     cursor: pointer;
+    transition: background 0.3s ease;
   }
   
-  .login-button:hover {
-    background-color: #4a148c;
+  .signin-button:hover {
+    background: #5a6fd1;
   }
   
-  a {
-    color: #6a1b9a;
+  .signup-link {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: #555;
+    text-align: center;
+  }
+  
+  .signup-link a {
+    color: #667eea;
     text-decoration: none;
+    font-weight: 600;
   }
   
-  a:hover {
+  .signup-link a:hover {
     text-decoration: underline;
   }
