@@ -9,7 +9,7 @@ const SignIn = () => {
     <div className="signin-container" style={{ backgroundImage: `url(${bgImage})` }}>
       <div className="signin-card">
         <img
-          src={cardImage} // Path to the card image in the public folder
+          src={cardImage} 
           alt="Login Card"
           className="card-image"
         />
