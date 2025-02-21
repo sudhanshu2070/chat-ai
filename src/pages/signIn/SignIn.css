@@ -4,7 +4,6 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-image: url('../../assets/images/bg2.jpg'); /* Path to the background image in the public folder */
     background-size: cover;
     background-position: center;
     padding: 20px;

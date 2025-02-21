@@ -1,11 +1,12 @@
 import React from "react";
 import "./SignIn.css";
 import cardImage from   "../../assets/images/img1.png"; // Import the card image from the assets folder
+import bgImage from "../../assets/images/bg.jpg"; // Import the background image from the assets folder
 
 
 const SignIn = () => {
   return (
-    <div className="signin-container">
+    <div className="signin-container" style={{ backgroundImage: `url(${bgImage})` }}>
       <div className="signin-card">
         <img
           src={cardImage} // Path to the card image in the public folder
