@@ -12,7 +12,7 @@
 /* Card styling */
 .signup-card {
   display: flex;
-  background: rgba(255, 255, 255, 0.9);
+  background: #1E1E1E;
   border-radius: 15px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -37,7 +37,7 @@
 .signup-form h2 {
   margin-bottom: 20px;
   font-size: 2rem;
-  color: #333;
+  color: #FFFFFF;
   text-align: center;
 }
 
