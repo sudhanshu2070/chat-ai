@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import SignIn from './pages/SignIn/SignIn';
 import SignUp from './pages/SignUp/SignUp';
+import ChatScreen from './pages/ChatScreen/ChatScreen';
 
 function App() {
   return(
@@ -19,9 +20,10 @@ function App() {
 
     {/* Routes */}
     <Routes>
+      <Route path="/" element={<SignIn />} /> {/* Default route */}
       <Route path="/signin" element={<SignIn />} />
       <Route path="/signup" element={<SignUp />} />
-      <Route path="/" element={<SignIn />} /> {/* Default route */}
+      <Route path="/chat-Screen" element={<ChatScreen />} />
     </Routes>
   </div>
 </Router>
