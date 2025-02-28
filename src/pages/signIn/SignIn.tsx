@@ -1,16 +1,16 @@
 import React from "react";
-import { useNavigation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./SignIn.css";
 import cardImage from   "../../assets/images/img1.png"; // Import the card image from the assets folder
 import bgImage from "../../assets/images/bg.jpg"; // Import the background image from the assets folder
 
 
 const SignIn:React.FC = () => {
-  const navigate = useNavigation();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-   // navigate('chat-Screen');
+    navigate("/home-page");
   }
 
   return (
@@ -23,7 +23,7 @@ const SignIn:React.FC = () => {
         />
         <div className="signin-form">
           <h2>Good Morning!</h2>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="input-group">
               <label htmlFor="email">Email</label>
               <input type="email" id="email" placeholder="Enter your email" />

@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import SignIn from './pages/signIn/SignIn';
 import SignUp from './pages/signUp/SignUp';
 import ChatScreen from './pages/ChatScreen/ChatScreen';
+import HomePage from './pages/HomePage/HomePage';
 
 function App() {
   return(
@@ -23,6 +24,7 @@ function App() {
       <Route path="/" element={<SignIn />} /> {/* Default route */}
       <Route path="/signin" element={<SignIn />} />
       <Route path="/signup" element={<SignUp />} />
+      <Route path="/home-page" element={<HomePage />} />
       <Route path="/chat-Screen" element={<ChatScreen />} />
     </Routes>
   </div>
