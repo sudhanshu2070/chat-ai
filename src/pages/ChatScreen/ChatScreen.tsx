@@ -37,12 +37,22 @@ const ChatScreen: React.FC = () => {
     setIsLoading(true);
   
     try {
-      const response = await fetch("https://dummyjson.com/quotes/random");
+      // const response = await fetch("https://dummyjson.com/quotes/random");
+      const response = await fetch("http://127.0.0.1:8000/api/v1/query-pdf", {
+          method:"POST", 
+          headers:{
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+          }, 
+          body: JSON.stringify({ question: input }), // Sending user's question
+        }
+      );
       const data = await response.json();
-      const botMessage: Message = { text: data.quote, sender: "bot" };
+      // const botMessage: Message = { text: data.quote, sender: "bot" };
   
       // Append bot response to messages
-      setMessages((prevMessages) => [...prevMessages, botMessage]);
+      // setMessages((prevMessages) => [...prevMessages, botMessage]);
+      setMessages((prev) => [...prev, { text: data.answer, sender: "bot" }]);
   
       // Update history (keeping only the last 3 responses)
       setHistory((prev) => [{ text: data.quote }, ...prev.slice(0, 2)]);

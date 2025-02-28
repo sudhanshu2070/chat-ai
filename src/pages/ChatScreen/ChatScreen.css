@@ -10,7 +10,7 @@
 
 /* Chat Section - 70% of screen */
 .chat-section {
-  flex: 9; /* 70% width */
+  flex: 11; /* 70% width */
   display: flex;
   flex-direction: column;
   height: 100vh;
