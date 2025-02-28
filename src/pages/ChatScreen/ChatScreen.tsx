@@ -2,17 +2,14 @@ import React, { useState, useEffect } from "react";
 import "./ChatScreen.css";
 
 type Message = { text: string; sender: "user" | "bot" };
-
 type HistoryItem = { text: string };
-
-type Tab = "FAQs" | "History";
 
 const ChatScreen: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [history, setHistory] = useState<HistoryItem[]>([]);
-  const [tab, setTab] = useState<Tab>("FAQs");
+  const [faqs, setFaqs] = useState<{ text: string }[]>([]);
 
   useEffect(() => {
     fetchRecentRequests();
@@ -48,11 +45,11 @@ const ChatScreen: React.FC = () => {
         }
       );
       const data = await response.json();
-      // const botMessage: Message = { text: data.quote, sender: "bot" };
+      let botResponse = data.answer ? data.answer : data.detail; //in the case of Bad request/no pdf uploaded
+      console.log(data);
   
       // Append bot response to messages
-      // setMessages((prevMessages) => [...prevMessages, botMessage]);
-      setMessages((prev) => [...prev, { text: data.answer, sender: "bot" }]);
+      setMessages((prev) => [...prev, { text: botResponse, sender: "bot" }]);
   
       // Update history (keeping only the last 3 responses)
       setHistory((prev) => [{ text: data.quote }, ...prev.slice(0, 2)]);
@@ -95,30 +92,37 @@ const ChatScreen: React.FC = () => {
 
       {/* Right Section - Sidebar */}
       <div className="sidebar">
-        <div className="tab-buttons">
-          <button className={tab === "FAQs" ? "active" : ""} onClick={() => setTab("FAQs")}>FAQs</button>
-          <button className={tab === "History" ? "active" : ""} onClick={() => setTab("History")}>History</button>
-        </div>
-
-        <div className="tab-content">
-          {tab === "FAQs" && (
+        <div className="sidebar-section">
+          {/* Upper Half - FAQs */}
+          <div className="faq-section">
+            <h3 className="section-heading">Common FAQs</h3>
             <div className="faq-content">
-              <h3>Common FAQs</h3>
-              {history.map((item, index) => (
-                <div key={index} className="history-item">{item.text}</div>
-              ))}
+              {faqs.length > 0 ? (
+                faqs.map((item, index) => (
+                  <div key={index} className="faq-item">{item.text}</div>
+                ))
+              ) : (
+                <p className="empty-message">No FAQs available.</p>
+              )}
             </div>
-          )}
-          {tab === "History" && (
+          </div>
+
+          {/* Lower Half - History */}
+          <div className="history-section">
+            <h3 className="section-heading">Message History</h3>
             <div className="history-content">
-              <h3>Message History</h3>
-              {history.map((item, index) => (
-                <div key={index} className="history-item">{item.text}</div>
-              ))}
+              {history.length > 0 ? (
+                history.map((item, index) => (
+                  <div key={index} className="history-item">{item.text}</div>
+                ))
+              ) : (
+                <p className="empty-message">No message history yet.</p>
+              )}
             </div>
-          )}
+          </div>
         </div>
       </div>
+
     </div>
   );
 };

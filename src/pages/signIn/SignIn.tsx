@@ -1,10 +1,18 @@
 import React from "react";
+import { useNavigation } from "react-router-dom";
 import "./SignIn.css";
 import cardImage from   "../../assets/images/img1.png"; // Import the card image from the assets folder
 import bgImage from "../../assets/images/bg.jpg"; // Import the background image from the assets folder
 
 
-const SignIn = () => {
+const SignIn:React.FC = () => {
+  const navigate = useNavigation();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+   // navigate('chat-Screen');
+  }
+
   return (
     <div className="signin-container" style={{ backgroundImage: `url(${bgImage})` }}>
       <div className="signin-card">
