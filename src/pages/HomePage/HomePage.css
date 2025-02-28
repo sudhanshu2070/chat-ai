@@ -80,7 +80,7 @@
   /* Buttons */
   .buttons {
     margin-top: 20px;
-    display: flex;
+    display: inline-flex;
     gap: 15px;
   }
   
