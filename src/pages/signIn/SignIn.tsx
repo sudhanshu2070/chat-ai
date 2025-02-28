@@ -10,7 +10,7 @@ const SignIn:React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    navigate("/home-page");
+    navigate("/home");
   }
 
   return (
