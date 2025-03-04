@@ -45,13 +45,13 @@ const ChatScreen: React.FC = () => {
         }
       );
       const data = await response.json();
-      let botResponse = data.answer ? data.answer : data.detail; //in the case of Bad request/no pdf uploaded
+      let botResponse = data.answer ? data.answer : data.detail; //in the case of bad request/no pdf uploaded
       console.log(data);
   
-      // Append bot response to messages
+      // Appending bot response to messages
       setMessages((prev) => [...prev, { text: botResponse, sender: "bot" }]);
   
-      // Update history (keeping only the last 3 responses)
+      // Updating history (keeping only the last 3 responses)
       setHistory((prev) => [{ text: data.quote }, ...prev.slice(0, 2)]);
     } catch (error) {
       console.error("Error fetching response:", error);
@@ -64,6 +64,13 @@ const ChatScreen: React.FC = () => {
     }
   };
   
+  const formatMessage = (text:string ) => {
+    return text
+      .replace(/(?<=\d\.) /g, "• ") // Convert numbered lists
+      .replace(/\*\*(.*?)\*\*/g, "<b>$1</b>") // Bold text
+      .replace(/\n/g, "<br>"); // Preserve line breaks
+  };
+
   return (
     <div className="chat-container">
       {/* Left Section - Chat */}
@@ -71,7 +78,8 @@ const ChatScreen: React.FC = () => {
         <div className="chat-box">
           {messages.map((msg, index) => (
             <div key={index} className={`message ${msg.sender}`}>
-              <span>{msg.text}</span>
+              {/* <span>{msg.text}</span> */}
+              <span dangerouslySetInnerHTML={{ __html: formatMessage(msg.text) }} />
             </div>
           ))}
           {isLoading && <div className="message bot typing">Typing...</div>}
@@ -82,7 +90,7 @@ const ChatScreen: React.FC = () => {
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && sendMessage()} // Trigger on Enter key press
+            onKeyDown={(e) => e.key === "Enter" && sendMessage()} // Triggerring on the "Enter" key press
             placeholder="Type a message..."
             className="chat-input"
           />
