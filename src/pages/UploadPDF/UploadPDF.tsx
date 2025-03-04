@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"; 
 import "./UploadPDF.css"; 
 
 const UploadPDF: React.FC = () => {
@@ -37,9 +38,18 @@ const UploadPDF: React.FC = () => {
             const data = await response.json();
 
             if (response.ok) {
-                const message = `File Uploaded Sccuessfully, the Source ID: ${data.sourceId}`;
-                setUploadStatus(message);
-                toast.success(message, { position: "top-right", autoClose: 3000 });
+                //const message = `File Uploaded Sccuessfully, the Source ID: ${data.sourceId}`;
+                //setUploadStatus(message);
+                toast.success(`PDF uploaded successfully! 🎉 Source ID: ${data.sourceId}`, {
+                    position: "top-right",
+                    autoClose: 3000, // Auto close after 3 seconds
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    theme: "light", // Use the light theme
+                    style: { backgroundColor: "#e0e0e0", color: "#333" }, // Light grey background with dark text
+                });                
             } 
             else {
                 const errorMessage = `Error: ${data.detail || "Upload failed."}`;
@@ -60,6 +70,17 @@ const UploadPDF: React.FC = () => {
             <input type="file" accept="application/pdf" onChange={handleFileChange} />
             <button onClick={handleUpload} disabled={!file}>Upload PDF</button>
             {uploadStatus && <p className="upload-status">{uploadStatus}</p>}
+            <ToastContainer
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={true}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </div>
     );
 };
