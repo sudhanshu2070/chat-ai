@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; 
-import "./UploadPDF.css"; 
+import "react-toastify/dist/ReactToastify.css";
+import "./UploadPDF.css";
 
 const UploadPDF: React.FC = () => {
     const [file, setFile] = useState<File | null>(null);
@@ -28,7 +28,8 @@ const UploadPDF: React.FC = () => {
             const blob = await response.blob();
             const networkFile = new File([blob], "network-file.pdf", { type: "application/pdf" });
 
-            handleUpload(networkFile);
+            setFile(networkFile);
+            await handleUpload(networkFile); // Upload after fetching
         } catch (error) {
             toast.error(`Error fetching PDF: ${error}`, { position: "top-right" });
         }
@@ -36,13 +37,13 @@ const UploadPDF: React.FC = () => {
 
     // Handle file upload
     const handleUpload = async (selectedFile: File) => {
-        if (!file) {
+        if (!selectedFile) {
             setUploadStatus("No file selected.");
             return;
         }
 
         const formData = new FormData();
-        formData.append("file", file);
+        formData.append("file", selectedFile);
 
         try {
             const response = await fetch("http://127.0.0.1:8000/api/v1/upload-pdf", {
@@ -53,24 +54,19 @@ const UploadPDF: React.FC = () => {
             const data = await response.json();
 
             if (response.ok) {
-                //const message = `File Uploaded Sccuessfully, the Source ID: ${data.sourceId}`;
-                //setUploadStatus(message);
                 toast.success(`PDF uploaded successfully! 🎉 Source ID: ${data.sourceId}`, {
                     position: "top-right",
-                    autoClose: 3000, // Auto close after 3 seconds
+                    autoClose: 3000,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
                     draggable: true,
-                    theme: "light", // Use the light theme
-                    style: { backgroundColor: "#e0e0e0", color: "#333" }, // Light grey background with dark text
-                });                
-            } 
-            else {
+                    theme: "light",
+                    style: { backgroundColor: "#e0e0e0", color: "#333" },
+                });
+            } else {
                 const errorMessage = `Error: ${data.detail || "Upload failed."}`;
                 setUploadStatus(errorMessage);
-
-                // Showing the error toast
                 toast.error(errorMessage, { position: "top-right", autoClose: 3000 });
             }
         } catch (error) {
@@ -83,14 +79,16 @@ const UploadPDF: React.FC = () => {
     return (
         <div className="upload-container">
             <input type="file" accept="application/pdf" onChange={handleFileChange} />
-            <button onClick={() => file && UploadPDF(file)}  disabled={!file}>Upload PDF</button>
+            <button onClick={() => file && handleUpload(file)} disabled={!file}>
+                Upload PDF
+            </button>
             <button onClick={handleFetchAndUpload}>Fetch & Upload from Network</button>
             {uploadStatus && <p className="upload-status">{uploadStatus}</p>}
             <ToastContainer
                 position="top-right"
                 autoClose={3000}
                 hideProgressBar={false}
-                newestOnTop={true}
+                newestOnTop
                 closeOnClick
                 rtl={false}
                 pauseOnFocusLoss
