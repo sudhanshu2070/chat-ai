@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 import "./UploadPDF.css"; 
 
 const UploadPDF: React.FC = () => {
@@ -36,14 +37,21 @@ const UploadPDF: React.FC = () => {
             const data = await response.json();
 
             if (response.ok) {
-                alert("PDF Uploaded Successfully")
-                setUploadStatus(`the Source ID: ${data.sourceId}`);
-            } else {
-                setUploadStatus(`Error: ${data.detail || "Upload failed."}`);
+                const message = `File Uploaded Sccuessfully, the Source ID: ${data.sourceId}`;
+                setUploadStatus(message);
+                toast.success(message, { position: "top-right", autoClose: 3000 });
+            } 
+            else {
+                const errorMessage = `Error: ${data.detail || "Upload failed."}`;
+                setUploadStatus(errorMessage);
+
+                // Showing the error toast
+                toast.error(errorMessage, { position: "top-right", autoClose: 3000 });
             }
         } catch (error) {
             console.error("Upload failed:", error);
             setUploadStatus("An error occurred during upload.");
+            toast.error("An error occurred during upload.", { position: "top-right", autoClose: 3000 });
         }
     };
 
