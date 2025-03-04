@@ -73,6 +73,9 @@ const ChatScreen: React.FC = () => {
 
   return (
     <div className="chat-container">
+
+      
+
       {/* Left Section - Chat */}
       <div className="chat-section">
         <div className="chat-box">

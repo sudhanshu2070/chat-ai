@@ -12,8 +12,9 @@
     height: 20vh;
     text-align: center;
     background-color: #f9f9f9;
-    margin-top: 200px;
-    margin-left: 500px;
+
+    margin-top: 15%;
+    margin-left: 40%;
 }
 
 .upload-container input {

@@ -19,8 +19,23 @@ const UploadPDF: React.FC = () => {
         }
     };
 
+    // Fetch PDF from the network and upload
+    const handleFetchAndUpload = async () => {
+        try {
+            const response = await fetch("http://localhost:8080/get-pdf");
+            if (!response.ok) throw new Error("Failed to fetch PDF");
+
+            const blob = await response.blob();
+            const networkFile = new File([blob], "network-file.pdf", { type: "application/pdf" });
+
+            handleUpload(networkFile);
+        } catch (error) {
+            toast.error(`Error fetching PDF: ${error}`, { position: "top-right" });
+        }
+    };
+
     // Handle file upload
-    const handleUpload = async () => {
+    const handleUpload = async (selectedFile: File) => {
         if (!file) {
             setUploadStatus("No file selected.");
             return;
@@ -68,7 +83,8 @@ const UploadPDF: React.FC = () => {
     return (
         <div className="upload-container">
             <input type="file" accept="application/pdf" onChange={handleFileChange} />
-            <button onClick={handleUpload} disabled={!file}>Upload PDF</button>
+            <button onClick={() => file && UploadPDF(file)}  disabled={!file}>Upload PDF</button>
+            <button onClick={handleFetchAndUpload}>Fetch & Upload from Network</button>
             {uploadStatus && <p className="upload-status">{uploadStatus}</p>}
             <ToastContainer
                 position="top-right"
