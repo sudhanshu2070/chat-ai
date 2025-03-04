@@ -1,9 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SignIn from './pages/signIn/SignIn';
 import SignUp from './pages/signUp/SignUp';
 import ChatScreen from './pages/ChatScreen/ChatScreen';
 import HomePage from './pages/HomePage/HomePage';
+import UploadPDF from './pages/UploadPDF/UploadPDF';
 
 function App() {
   return(
@@ -26,6 +27,7 @@ function App() {
       <Route path="/signup" element={<SignUp />} />
       <Route path="/home" element={<HomePage />} />
       <Route path="/chat-Screen" element={<ChatScreen />} />
+      <Route path="/upload-pdf" element={<UploadPDF />} />
     </Routes>
   </div>
 </Router>
