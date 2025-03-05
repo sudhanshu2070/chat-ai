@@ -21,7 +21,7 @@ const HomePage: React.FC = () => {
         <p>Chat with AI about any query or doubts.</p>
         <div className="buttons">
           <Link to="/chat-Screen" className="btn primary">Start Chatting</Link>
-          <Link to="/upload-pdf" className="btn secondary">Upload a PDF</Link>
+          {/* <Link to="/upload-pdf" className="btn secondary">Upload a PDF</Link> */}
         </div>
       </div>
     </div>

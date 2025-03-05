@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./ChatScreen.css";
+import logo from "../../assets/images/Infozech.png"
 
 type Message = { text: string; sender: "user" | "bot" };
 type HistoryItem = { text: string };
@@ -9,7 +10,11 @@ const ChatScreen: React.FC = () => {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [history, setHistory] = useState<HistoryItem[]>([]);
-  const [faqs, setFaqs] = useState<{ text: string }[]>([]);
+  const [faqs, setFaqs] = useState<{ text: string }[]>([
+    { text: "What is the process to Add a New customer in iBill?" },
+    { text: "How can I associate MA/Charges Details with the added customer?" },
+    { text: "How can I view already associated Charges / Master Agreements?" }
+  ]);  
 
   useEffect(() => {
     fetchRecentRequests();
@@ -25,10 +30,11 @@ const ChatScreen: React.FC = () => {
     }
   };
 
-  const sendMessage = async () => {
-    if (!input.trim()) return;
+  const sendMessage = async (messageText?: string) => {
+    const textToSend = messageText || input.trim(); // Use provided text or input field value
+    if (!textToSend) return;
   
-    const newMessages: Message[] = [...messages, { text: input, sender: "user" }];
+    const newMessages: Message[] = [...messages, { text: textToSend, sender: "user" }];
     setMessages(newMessages);
     setInput("");
     setIsLoading(true);
@@ -41,7 +47,7 @@ const ChatScreen: React.FC = () => {
             "Accept": "application/json",
             "Content-Type": "application/json",
           }, 
-          body: JSON.stringify({ question: input }), // Sending user's question
+          body: JSON.stringify({ question: textToSend }), // Sending user's question
         }
       );
       const data = await response.json();
@@ -71,10 +77,21 @@ const ChatScreen: React.FC = () => {
       .replace(/\n/g, "<br>"); // Preserve line breaks
   };
 
+  const handleFaqClick = (faqText:string) => {
+      // Added the FAQ text to the chat immediately for better UX
+      setMessages((prevMessages) => [...prevMessages, { text: faqText, sender: "user" }]);
+      setInput(faqText); // Clear the input field
+      console.log(`faqText : ${faqText}`);
+      sendMessage(faqText); // Send the message
+  };
+
   return (
     <div className="chat-container">
 
-      
+      {/* Logo Section */}
+      <div className="logo-container">
+        <img src={logo} alt="Chat Logo" className="chat-logo" />
+      </div>
 
       {/* Left Section - Chat */}
       <div className="chat-section">
@@ -97,7 +114,7 @@ const ChatScreen: React.FC = () => {
             placeholder="Type a message..."
             className="chat-input"
           />
-          <button onClick={sendMessage} className="send-button">Send</button>
+          <button onClick={() => sendMessage()} className="send-button">Send</button>
         </div>
       </div>
 
@@ -106,17 +123,25 @@ const ChatScreen: React.FC = () => {
         <div className="sidebar-section">
           {/* Upper Half - FAQs */}
           <div className="faq-section">
-            <h3 className="section-heading">Common FAQs</h3>
-            <div className="faq-content">
-              {faqs.length > 0 ? (
-                faqs.map((item, index) => (
-                  <div key={index} className="faq-item">{item.text}</div>
-                ))
-              ) : (
-                <p className="empty-message">No FAQs available.</p>
-              )}
+              <h3 className="section-heading">Common FAQs</h3>
+              <div className="faq-content">
+                {faqs.length > 0 ? (
+                  <ul className="faq-list">
+                    {faqs.map((item, index) => (
+                      <li 
+                          key={index} 
+                          className="faq-item"
+                          onClick={() => handleFaqClick(item.text)} // Click handler
+                      >
+                        {item.text}
+                      </li>
+                      ))}
+                  </ul>
+                  ) : (
+                    <p className="empty-message">No FAQs available.</p>
+                  )}
+              </div>
             </div>
-          </div>
 
           {/* Lower Half - History */}
           <div className="history-section">
