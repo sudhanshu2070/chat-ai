@@ -1,13 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./HomePage.css"; 
+import logo from "../../assets/images/Infozech.png"
 
 const HomePage: React.FC = () => {
   return (
     <div className="home-container">
       {/* Navbar */}
       <nav className="navbar">
-        <div className="logo">Your Personalized AI</div>
+        {/* <div className="logo">Your Personalized AI</div> */}
+        {/* Logo Section */}
+          <img src={logo} alt="Chat Logo" className="chat-logoHomePage" />
+
         <div className="nav-links">
           <Link to="/home" className="nav-item">Home</Link>
           <Link to="/chat-Screen" className="nav-item">Chat with AI</Link>
