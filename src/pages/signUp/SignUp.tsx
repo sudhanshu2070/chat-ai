@@ -1,7 +1,7 @@
 import React from "react";
 import "./SignUp.css";
 import cardImage from "../../assets/images/img1.png"; // Import the card image
-import bgImage from "../../assets/images/bg2.jpg"; // Import the background image
+import bgImage from "../../assets/images/bg1.jpg"; // Import the background image
 
 const SignUp = () => {
   return (
