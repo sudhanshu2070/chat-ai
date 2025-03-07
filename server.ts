@@ -10,11 +10,10 @@ const PORT = 8080;
 app.use(cors());
 
 // Define the network PDF file path
-const pdfFilePath = "\\\\192.168.0.2\\AIMation_Hack\\Automation Geeks\\Document\\Sample_FAQs Document_AImation.pdf";
+const pdfFilePath = "\\\\192.168.0.2\\AIMation_Hack\\Automation Geeks\\Sample FAQs Document\\Sample_FAQs Document_AImation.pdf";
 
 // Endpoint to read PDF from network drive and send it as a file response
 app.get("/get-pdf", (req, res) => {
-    console.log("API Called");
     fs.readFile(pdfFilePath, (err, data) => {
         if (err) {
             console.error("Error reading PDF:", err);
