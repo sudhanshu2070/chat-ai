@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./ChatScreen.css";
 import logo from "../../assets/images/Infozech.png"
+import backGroundImage from "../../assets/images/logo212Comp.jpg"
 
 type Message = { text: string; sender: "user" | "bot" };
 type HistoryItem = { text: string };
@@ -117,7 +118,7 @@ const ChatScreen: React.FC = () => {
 
       {/* Left Section - Chat */}
       <div className="chat-section">
-        <div className="chat-box">
+      <div className="chat-box" style={{ backgroundImage: `url(${backGroundImage})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
           {messages.map((msg, index) => (
             <div key={index} className={`message ${msg.sender}`}>
               {/* <span>{msg.text}</span> */}
@@ -133,7 +134,7 @@ const ChatScreen: React.FC = () => {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && sendMessage()} // Triggerring on the "Enter" key press
-            placeholder="Type a message..."
+            placeholder="Ask me anything.."
             className="chat-input"
           />
           <button onClick={() => sendMessage()} className="send-button">Send</button>

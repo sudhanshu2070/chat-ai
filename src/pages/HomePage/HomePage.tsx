@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./HomePage.css"; 
 import logo from "../../assets/images/Infozech.png"
+// import logo from "../../assets/images/logoComp.jpg"
 
 const HomePage: React.FC = () => {
   return (
