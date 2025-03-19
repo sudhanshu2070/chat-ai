@@ -18,7 +18,7 @@ const SignIn:React.FC = () => {
       // navigate to the home page
       navigate("/home");
     } else {
-      alert("Wrong email or password");
+      setError("Invalid username or password.");
     }
   }
 
@@ -53,6 +53,7 @@ const SignIn:React.FC = () => {
                 onChange={(e) => setPassword(e.target.value)} // Set password state
               />
             </div>
+            {error && <p className="error-message">{error}</p>}
             <button type="submit" className="signin-button">
               Login
             </button>
